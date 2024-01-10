@@ -26,5 +26,5 @@ This real-time chat application, developed with Rust and Rocket, is used as an e
 
 2. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/chat-rust-rocket.git
+   git clone https://github.com/mnsh4/chat-rust-rocket.git
    ```

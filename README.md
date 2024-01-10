@@ -1,6 +1,6 @@
-# Real-Time Chat with Rust and Rocket
+# Real-Time Chat with Rust and Rocket - DevOps Practice Example
 
-This is a real-time chat application developed with Rust and Rocket, inspired by Slack. It provides instant messaging between users, thematic channels, and user authentication.
+This real-time chat application, developed with Rust and Rocket, is used as an example for DevOps practice, showcasing Kubernetes (K8s) deployment. The app provides instant messaging between users, thematic channels, and user authentication.
 
 ## Key Features
 
@@ -12,6 +12,9 @@ This is a real-time chat application developed with Rust and Rocket, inspired by
 
 - **Backend:** Rust with Rocket as the web framework.
 - **Database:** PostgreSQL for storing user data, messages, and channels.
+- **DevOps Tools:**
+  - CI/CD: GitHub Actions, Azure DevOps, or Jenkins.
+  - Orchestration: Kubernetes (K8s) for container orchestration.
 
 ## Installation and Setup
 
@@ -19,6 +22,7 @@ This is a real-time chat application developed with Rust and Rocket, inspired by
 
    - Rust and Cargo installed.
    - PostgreSQL installed and configured.
+   - Kubernetes (K8s) cluster or Minikube installed for deployment.
 
 2. **Clone the Repository:**
    ```bash

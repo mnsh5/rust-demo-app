@@ -1,12 +1,16 @@
+mod db;
+
 #[macro_use]
 extern crate rocket;
 
 #[get("/")]
-fn index() -> &'static str {
+async fn index() -> &'static str {
     "Hello, world!"
 }
 
 #[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+async fn rocket() -> _ {
+    rocket::build()
+        .manage(db::database::establish_connection)
+        .mount("/api/v1", routes![index])
 }

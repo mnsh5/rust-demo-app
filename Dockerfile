@@ -1,19 +1,19 @@
 FROM rust:1.75.0-alpine3.18 AS builder
-RUN apk add --no-cache musl-dev gcc
+RUN apk add --no-cache musl-dev gcc postgresql-dev
 WORKDIR /app
 
 # Primero, copia solo los archivos de dependencias y compila
-COPY Cargo.toml Cargo.lock ./
+# COPY Cargo.toml Cargo.lock ./
 # RUN mkdir src && touch src/main.rs
-RUN cargo build --release
+# RUN cargo build --release
 
 # Luego, copia el resto del código y realiza la construcción final
 COPY . .
 RUN cargo build --release
 
 # Etapa final: crear una imagen más pequeña
-FROM alpine:3.18
-RUN apk add --no-cache libgcc
+FROM rust:1.75-slim-buster
+RUN apt-get update && apt-get install -y gcc
 
 WORKDIR /app
 
@@ -24,4 +24,4 @@ COPY --from=builder /app/target/release/chat-rust-rocket .
 EXPOSE 8000
 
 # Comando para ejecutar tu aplicación cuando el contenedor se inicia
-CMD ["./chat-rust-rocket"]
+CMD ["cargo", "run"]

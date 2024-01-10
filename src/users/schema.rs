@@ -4,5 +4,6 @@ diesel::table! {
         username -> Varchar,
         password -> Varchar,
         email -> Varchar,
+        is_active -> Bool
     }
 }

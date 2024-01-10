@@ -19,3 +19,6 @@ Cargo.lock
 /Cargo.lock
 main
 .vscode
+
+pgdata/
+.env

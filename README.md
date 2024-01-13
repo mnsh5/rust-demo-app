@@ -40,7 +40,7 @@ docker build -t app_sample .
 ## Run built image
 
 ```shell
-docker run -d -p 8080:8080 app_sample
+docker run -d -p 8000:8000 app_sample
 # and the server should start instantly
 curl http://localhost:8000
 ```

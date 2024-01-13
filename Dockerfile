@@ -1,27 +1,36 @@
-FROM rust:1.75.0-alpine3.18 AS builder
-RUN apk add --no-cache musl-dev gcc postgresql-dev
-WORKDIR /app
+#################
+## build stage ##
+#################
+FROM rust:1-slim-bullseye AS builder
+WORKDIR /code
 
-# Primero, copia solo los archivos de dependencias y compila
-# COPY Cargo.toml Cargo.lock ./
-# RUN mkdir src && touch src/main.rs
-# RUN cargo build --release
+# Download crates-io index and fetch dependency code.
+# This step avoids needing to spend time on every build downloading the index
+# which can take a long time within the docker context. Docker will cache it.
+RUN USER=root cargo init
+COPY Cargo.toml Cargo.toml
+RUN cargo fetch
 
-# Luego, copia el resto del código y realiza la construcción final
-COPY . .
+# copy app files
+COPY src src
+
+# compile app
 RUN cargo build --release
 
-# Etapa final: crear una imagen más pequeña
-FROM rust:1.75-slim-buster
-RUN apt-get update && apt-get install -y gcc
-
+###############
+## run stage ##
+###############
+FROM almalinux:minimal
 WORKDIR /app
 
-# Copia solo el ejecutable compilado
-COPY --from=builder /app/target/release/chat-rust-rocket .
+# copy server binary from build stage
+COPY --from=builder /code/target/release/app_sample app_sample
 
-# Expone el puerto que utiliza tu aplicación (si es necesario)
+# set user to non-root unless root is required for your app
+USER 1001
+
+# indicate what port the server is running on
 EXPOSE 8000
 
-# Comando para ejecutar tu aplicación cuando el contenedor se inicia
-CMD ["cargo", "run"]
+# run server
+CMD [ "/app/app_sample" ]

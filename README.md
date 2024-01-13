@@ -28,3 +28,26 @@ This real-time chat application, developed with Rust and Rocket, is used as an e
    ```bash
    git clone https://github.com/mnsh4/chat-rust-rocket.git
    ```
+
+# Docker sample
+
+## Build image
+
+```shell
+docker build -t app_sample .
+```
+
+## Run built image
+
+```shell
+docker run -d -p 8080:8080 app_sample
+# and the server should start instantly
+curl http://localhost:8000
+```
+
+## Running unit tests
+
+```shell
+docker build -t app_sample:test .
+docker run --rm app_sample:test
+```

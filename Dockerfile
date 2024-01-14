@@ -7,9 +7,8 @@ WORKDIR /code
 # Download crates-io index and fetch dependency code.
 # This step avoids needing to spend time on every build downloading the index
 # which can take a long time within the docker context. Docker will cache it.
-RUN USER=root cargo init
 COPY Cargo.toml Cargo.toml
-RUN cargo fetch
+# RUN cargo fetch
 
 # copy app files
 COPY src src
@@ -24,13 +23,14 @@ FROM almalinux:minimal
 WORKDIR /app
 
 # copy server binary from build stage
-COPY --from=builder /code/target/release/app_sample app_sample
+# COPY --from=builder /code/target/release/app_sample app_sample
+COPY --from=builder /code/target/release/app_sample .
 
-# set user to non-root unless root is required for your app
-USER 1001
+ENV ROCKET_ADDRESS=0.0.0.0
+# ENV ROCKET_PORT=8000
 
 # indicate what port the server is running on
 EXPOSE 8000
 
-# run server
-CMD [ "/app/app_sample" ]
+# Run the server
+CMD ["./app_sample"]

@@ -8,7 +8,6 @@ WORKDIR /code
 # This step avoids needing to spend time on every build downloading the index
 # which can take a long time within the docker context. Docker will cache it.
 COPY Cargo.toml Cargo.toml
-# RUN cargo fetch
 
 # copy app files
 COPY src src
@@ -27,7 +26,6 @@ WORKDIR /app
 COPY --from=builder /code/target/release/app_sample .
 
 ENV ROCKET_ADDRESS=0.0.0.0
-# ENV ROCKET_PORT=8000
 
 # indicate what port the server is running on
 EXPOSE 8000

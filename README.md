@@ -1,4 +1,4 @@
-# Real-Time Chat with Rust and Rocket - DevOps Practice Example
+# DevOps Practice Example
 
 This real-time chat application, developed with Rust and Rocket, is used as an example for DevOps practice, showcasing Kubernetes (K8s) deployment. The app provides instant messaging between users, thematic channels, and user authentication.
 

@@ -24,7 +24,7 @@ services:
       - db
 
   app:
-    container_name: chat-rust-rocket
+    container_name: rust-demo-app
     build:
       context: .
       dockerfile: Dockerfile

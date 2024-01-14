@@ -22,8 +22,8 @@ FROM almalinux:minimal
 WORKDIR /app
 
 # copy server binary from build stage
-# COPY --from=builder /code/target/release/app_sample app_sample
-COPY --from=builder /code/target/release/app_sample .
+# COPY --from=builder /code/target/release/rust_demo_app rust_demo_app
+COPY --from=builder /code/target/release/rust_demo_app .
 
 ENV ROCKET_ADDRESS=0.0.0.0
 
@@ -31,4 +31,4 @@ ENV ROCKET_ADDRESS=0.0.0.0
 EXPOSE 8000
 
 # Run the server
-CMD ["./app_sample"]
+CMD ["./rust_demo_app"]

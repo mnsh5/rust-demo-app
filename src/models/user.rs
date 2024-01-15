@@ -10,3 +10,9 @@ pub struct User {
     pub country: String,
     pub is_active: Bool,
 }
+
+impl User {
+    pub fn new(uuid: String, username: String) -> User {
+        User { uuid, username }
+    }
+}
